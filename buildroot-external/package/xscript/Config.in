@@ -1,0 +1,25 @@
+config BR2_PACKAGE_XSCRIPT
+    bool "xscript"
+    # Pull in gpiod C library and CLI utilities automatically
+    select BR2_PACKAGE_LIBGPIOD           # C library (implicit but explicit is clearer)
+    select BR2_PACKAGE_LIBGPIOD_TOOLS     # gpioset/gpioinfo, etc.
+    help
+      Geekworm xscript fan and power‑management helper scripts.
+
+if BR2_PACKAGE_XSCRIPT
+
+config BR2_PACKAGE_XSCRIPT_FAN_SERVICE
+    bool "Install x‑c1‑fan service"
+    depends on BR2_PACKAGE_SYSTEMD
+    help
+      Install x‑c1‑fan.sh and the related systemd service/unit and enable it
+      automatically at boot (multi‑user.target).
+
+config BR2_PACKAGE_XSCRIPT_PWR_SERVICE
+    bool "Install x‑c1‑pwr service"
+    depends on BR2_PACKAGE_SYSTEMD
+    help
+      Install xPWR.sh and the related systemd service/unit and enable it
+      automatically at boot (multi‑user.target).
+
+endif
