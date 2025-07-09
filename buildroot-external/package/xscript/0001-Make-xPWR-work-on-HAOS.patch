@@ -1,0 +1,38 @@
+diff --color -uNr xscript-adcfdd7ac58dd222ccd5e9e4680e0e1872262006.orig/xPWR.sh xscript-adcfdd7ac58dd222ccd5e9e4680e0e1872262006/xPWR.sh
+--- xscript-adcfdd7ac58dd222ccd5e9e4680e0e1872262006.orig/xPWR.sh	2025-07-09 14:43:27.898903103 -0500
++++ xscript-adcfdd7ac58dd222ccd5e9e4680e0e1872262006/xPWR.sh	2025-07-09 14:52:21.360913032 -0500
+@@ -31,25 +31,29 @@
+   
+ # Initialize the BOOT pin to 1
+ gpioset $GPIOCHIP $BOOT=1  
++
++function getTimestamp {
++  python -c 'import time; print(int(time.time() * 1000))'
++}
+   
+ while [ 1 ]; do  
+   shutdownSignal=$(gpioget $GPIOCHIP $SHUTDOWN)  
+   if [ $shutdownSignal -eq 0 ]; then  
+     sleep 0.2  
+   else  
+-    pulseStart=$(date +%s%N | cut -b1-13)  
++    pulseStart=$(getTimestamp)  
+     while [ $shutdownSignal -eq 1 ]; do  
+       sleep 0.02  
+-      if [ $(($(date +%s%N | cut -b1-13)-$pulseStart)) -gt $REBOOTPULSEMAXIMUM ]; then  
++      if [ $(($(getTimestamp)-$pulseStart)) -gt $REBOOTPULSEMAXIMUM ]; then  
+         echo "Your device is shutting down on pin $SHUTDOWN, halting Rpi ..."  
+-        sudo poweroff  
++        poweroff  
+         exit  
+       fi  
+       shutdownSignal=$(gpioget $GPIOCHIP $SHUTDOWN)  
+     done  
+-    if [ $(($(date +%s%N | cut -b1-13)-$pulseStart)) -gt $REBOOTPULSEMINIMUM ]; then  
++    if [ $(($(getTimestamp)-$pulseStart)) -gt $REBOOTPULSEMINIMUM ]; then  
+       echo "Your device is rebooting on pin $SHUTDOWN, recycling Rpi ..."  
+-      sudo reboot  
++      reboot  
+       exit  
+     fi  
+   fi  
