@@ -26,7 +26,19 @@ function hassos_pre_image() {
         sed -i "s|#arm_64bit|arm_64bit|g" "${BOOT_DATA}/config.txt"
     fi
 
-    echo -e "\n# Enable pwm fan control\ndtoverlay=pwm-2chan" >> "${BOOT_DATA}/config.txt"
+    {
+        echo
+        echo "# Enable pwm fan control"
+        echo "dtoverlay=pwm-2chan"
+
+        echo
+        echo "# Initiate shutdown when button is pressed for two or more seconds"
+        echo "dtoverlay=gpio-shutdown,gpio_pin=4,active_low=0,gpio_pull=down"
+
+        echo
+        echo "# Cut power after system shutdown"
+        echo "dtoverlay=gpio-poweroff,gpiopin=27,active_low=0"
+    } >> "${BOOT_DATA}/config.txt"
 }
 
 
