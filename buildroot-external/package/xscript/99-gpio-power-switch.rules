@@ -1,4 +1,0 @@
-# gpio-shutdown overlay
-ACTION!="REMOVE", SUBSYSTEM=="input", KERNEL=="event*", \
-	SUBSYSTEMS=="platform", DRIVERS=="gpio-keys", \
-	ATTRS{keys}=="116", TAG+="power-switch"

@@ -21,8 +21,6 @@ define XSCRIPT_INSTALL_TARGET_CMDS
 	$(INSTALL) -D -m 0755 $(@D)/x-c1-fan.sh $(TARGET_DIR)/usr/local/bin/x-c1-fan.sh
 	$(INSTALL) -D -m 0755 $(@D)/xPWR.sh $(TARGET_DIR)/usr/local/bin/xPWR.sh
 	$(INSTALL) -D -m 0755 $(@D)/xSoft.sh $(TARGET_DIR)/usr/local/bin/xSoft.sh
-
-	$(INSTALL) -D -m 0644 $(XSCRIPT_PKGDIR)/99-gpio-power-switch.rules $(TARGET_DIR)/lib/udev/rules.d/
 endef
 
 define XSCRIPT_INSTALL_INIT_SYSTEMD
