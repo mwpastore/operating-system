@@ -13,7 +13,7 @@ XSCRIPT_LICENSE = MIT
 
 XSCRIPT_DEPENDENCIES += bc
 XSCRIPT_DEPENDENCIES += libgpiod
-ifeq ($(filter y,$(BR2_PACKAGE_XSCRIPT_BOOT_SERVICE) $(BR2_PACKAGE_XSCRIPT_FAN_SERVICE) $(BR2_PACKAGE_XSCRIPT_POWER_SERVICE)),y)
+ifeq ($(filter y,$(BR2_PACKAGE_XSCRIPT_FAN_SERVICE) $(BR2_PACKAGE_XSCRIPT_POWER_SERVICE)),y)
 XSCRIPT_DEPENDENCIES += systemd
 endif
 
@@ -24,13 +24,6 @@ define XSCRIPT_INSTALL_TARGET_CMDS
 endef
 
 define XSCRIPT_INSTALL_INIT_SYSTEMD
-	if [ "$(BR2_PACKAGE_XSCRIPT_BOOT_SERVICE)" = "y" ]; then \
-		$(INSTALL) -D -m 0644 $(@D)/x-c1-boot.service \
-			$(TARGET_DIR)/usr/lib/systemd/system/x-c1-boot.service; \
-	else \
-		rm -f $(TARGET_DIR)/usr/lib/systemd/system/x-c1-boot.service; \
-	fi
-
 	if [ "$(BR2_PACKAGE_XSCRIPT_FAN_SERVICE)" = "y" ]; then \
 		$(INSTALL) -D -m 0644 $(@D)/x-c1-fan.service \
 			$(TARGET_DIR)/usr/lib/systemd/system/x-c1-fan.service; \

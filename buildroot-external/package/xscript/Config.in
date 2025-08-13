@@ -6,11 +6,6 @@ config BR2_PACKAGE_XSCRIPT
 
 if BR2_PACKAGE_XSCRIPT
 
-config BR2_PACKAGE_XSCRIPT_BOOT_SERVICE
-    bool "Install x‑c1‑boot.service"
-    default y
-    depends on BR2_PACKAGE_SYSTEMD
-
 config BR2_PACKAGE_XSCRIPT_FAN_SERVICE
     bool "Install x‑c1‑fan.service"
     default y
