@@ -1,0 +1,19 @@
+config BR2_PACKAGE_XSCRIPT
+    bool "xscript"
+    select BR2_PACKAGE_BC
+    select BR2_PACKAGE_LIBGPIOD
+    select BR2_PACKAGE_LIBGPIOD_TOOLS # gpioset/gpioinfo, etc.
+
+if BR2_PACKAGE_XSCRIPT
+
+config BR2_PACKAGE_XSCRIPT_FAN_SERVICE
+    bool "Install x‑c1‑fan.service"
+    default y
+    depends on BR2_PACKAGE_SYSTEMD
+
+config BR2_PACKAGE_XSCRIPT_POWER_SERVICE
+    bool "Install x‑c1‑pwr.service"
+    default y
+    depends on BR2_PACKAGE_SYSTEMD
+
+endif

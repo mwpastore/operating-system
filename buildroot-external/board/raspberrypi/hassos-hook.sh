@@ -25,6 +25,12 @@ function hassos_pre_image() {
     if [[ "${BOARD_ID}" =~ "64" ]]; then
         sed -i "s|#arm_64bit|arm_64bit|g" "${BOOT_DATA}/config.txt"
     fi
+
+    {
+        echo
+        echo "# Enable pwm fan control"
+        echo "dtoverlay=pwm-2chan"
+    } >> "${BOOT_DATA}/config.txt"
 }
 
 
