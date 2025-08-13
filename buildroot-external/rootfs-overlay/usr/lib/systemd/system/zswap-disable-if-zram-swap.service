@@ -1,0 +1,13 @@
+[Unit]
+Description=Disable zswap if system RAM >= 1 GiB
+DefaultDependencies=no
+After=local-fs.target
+Before=swap.target
+ConditionMemory=>=1073741824
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c 'echo 0 > /sys/module/zswap/parameters/enabled'
+
+[Install]
+WantedBy=swap.target
