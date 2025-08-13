@@ -1,9 +1,9 @@
 [Unit]
-Description=Disable zswap if system RAM >= 1 GiB
+Description=Disable zswap
 DefaultDependencies=no
-After=local-fs.target
+Requires=zram-swap.service
+After=zram-swap.service
 Before=swap.target
-ConditionMemory=>=1073741824
 
 [Service]
 Type=oneshot

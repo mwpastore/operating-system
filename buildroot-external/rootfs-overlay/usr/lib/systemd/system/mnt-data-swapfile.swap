@@ -1,7 +1,6 @@
 [Unit]
 Description=HAOS swap file
 ConditionFileNotEmpty=/mnt/data/swapfile
-ConditionMemory=<1073741824
 
 [Swap]
 What=/mnt/data/swapfile

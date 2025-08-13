@@ -2,7 +2,6 @@
 Description=HassOS ZRAM swap
 Requires=zram-swap.service
 After=zram-swap.service
-ConditionMemory=>=1073741824
 
 [Swap]
 What=/dev/zram0
